@@ -5,7 +5,7 @@
  */
 package Demo_Languages;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+//import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,19 +16,19 @@ import java.util.List;
 public class Lexer {
 
     static List<Token> tokens = new ArrayList<>();
-    
-        // Num = [0-9]
+
+    // Num = [0-9]
     static boolean testNum(Source s) {
         if (!s.hasNext()) return false;
         return "0123456789".contains(s.current() + "");
     }
-    
+
     // Dot = '.'
     static boolean testChar(Source s, char c) {
         if (!s.hasNext()) return false;
         return s.current() == c;
     }
-    
+
     // Nums = Num+
     static boolean parseNums(Source s) {
         if (!testNum(s)) return false;
