@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net" modified="2021-01-20T13:25:17.175Z" agent="5.0 (Windows)" etag="DeMXpYGIuvXXjF0ZxDXX" version="14.2.5" type="github">
+  <diagram id="1xfbdReEDqjjCJSH6e5r" name="Page-1">
+    <mxGraphModel dx="452" dy="268" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zpOPxyArvAPpNhcmHQuC-3" value="&lt;div&gt;Lexer :&lt;/div&gt;&lt;div&gt;num = 0 .. 9&lt;/div&gt;&lt;div&gt;int = num { num }&lt;br&gt;&lt;/div&gt;&lt;div&gt;Number = int [ &#39;,&#39; int ]&lt;br&gt;&lt;/div&gt;&lt;div&gt;Keyword = &#39;POINT&#39; | &#39;MULTIPOINT&#39; |&amp;nbsp; ...&lt;/div&gt;&lt;div&gt;Dimen = &#39;Z&#39; | &#39;M&#39; | &#39;ZM&#39;&lt;/div&gt;&lt;div&gt;Symbol = &#39;(&#39; | &#39;)&#39; | &#39;,&#39;&lt;/div&gt;&lt;div&gt;null = &#39; &#39; | &#39;\t&#39; | &#39;\r&#39; | &#39;\n&#39;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Parser :&lt;/div&gt;&lt;div&gt;Coord := &#39;(&#39; Number Number [Number] &#39;)&#39;&lt;br&gt;&lt;/div&gt;&lt;div&gt;MultiCoord := &#39;(&#39; Coord { &#39;,&#39; Coord } &#39;)&#39;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Expr := Keyword [ Dimen ] ( Coord | MultiCoord )&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;( &#39;0&#39; ... &#39;9&#39; { &#39;0&#39; ... &#39;9&#39; } ) [ &#39;.&#39;&amp;nbsp; ( &#39;0&#39; ... &#39;9&#39; { &#39;0&#39; ... &#39;9&#39; } ) ] &amp;lt;=&amp;gt; [0-9]+ (&#39;.&#39; [0-9]+) ?&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="10" width="620" height="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
