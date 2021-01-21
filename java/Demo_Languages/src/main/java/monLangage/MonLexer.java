@@ -38,13 +38,11 @@ public class MonLexer {
 
     }
 
-    // Number = Nums ( '.' Nums )?
+    // Number = Nums ( '.' (Nums)? )?
     static boolean parseNumber(MaSource s) {
-        if (!parseNums(s)) return false;
+        if(!testNum(s)) return false;
+        parseNums(s);
         if (testChar(s, '.')) {
-            if(!(s.hasNext())){
-                return false;
-            }
             s.next();
             parseNums(s);
         }
@@ -64,8 +62,6 @@ public class MonLexer {
         tokens.add(new Token(s.consumeWord(), LexemType.SYMBOL));
         return true;
     }
-
-
 
     // Null = ' ' | '\t' | '\r' | '\n'
     static void removeNull(MaSource s) {
@@ -92,7 +88,7 @@ public class MonLexer {
     }
 
     public static void main(String[] args) {
-        MaSource s = new MaSource("(5 4.5 += + 7.8a");
+        MaSource s = new MaSource("(5 4.5 += + 7.8 9.");
 
         ParseExpr(s);
         tokens.forEach(System.out::println);
