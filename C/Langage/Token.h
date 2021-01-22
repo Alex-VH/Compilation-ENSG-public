@@ -117,6 +117,7 @@ void supprimeSuivant(ListToken* l){
         return;
     }
     if((*l)->suivant != NULL){
+        printf("Suivant : %c\n", (*l)->suivant->word[0]);
         tmp = (*l)->suivant;
         (*l)->suivant = tmp->suivant;
         tmp->suivant = NULL;
@@ -135,6 +136,7 @@ void supprimeTete(ListToken* l){
     if(*l == NULL){
         return;
     }
+    printf("Tete : %c\n", (*l)->word[0]);
     tmp=*l;
     *l = (*l)->suivant;
     tmp->suivant = NULL;

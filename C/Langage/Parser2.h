@@ -76,7 +76,7 @@ void consommeNombre(Pile *p, ListToken* l){
     
 }
 
-
+// E := T( (+|-) E )?
 bool parseE(ListToken *l, Pile* p){
     printf("Dans parseE\n");
     if(*l!=NULL){
@@ -97,7 +97,7 @@ bool parseE(ListToken *l, Pile* p){
     return true;
 }
 
-// F := T( (*|/) F )?
+// T := F( (*|/) T )?
 bool parseT(ListToken *l,Pile* p){
     printf("Dans parseT\n");
     if(*l!=NULL){
@@ -118,7 +118,7 @@ bool parseT(ListToken *l,Pile* p){
     return true;
 }
 
-// T := Entier | ( E )
+// F := Entier | "(" E ")"
 bool parseF(ListToken *l, Pile *p){
     printf("Dans parseF\n");
     if(*l!=NULL){

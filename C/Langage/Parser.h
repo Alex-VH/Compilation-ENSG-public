@@ -70,69 +70,81 @@ void consommeDivise(Pile *p){
  * @param p 
  * @param word 
  */
-void consommeNombre(Pile *p, char* word){
+void consommeNombre(Pile *p, ListToken* l){
     // printf("Consomme nombre\n");
-    int nombre = atoi(word);
+    int nombre = atoi((*l)->word);
+    supprimeTete(l);
     empiler(p,nombre);
+    
 }
 
-// E := F( (+|-) F)?
+// E := F {+ F}
 bool parseE(ListToken *l, Pile* p){
-    // printf("Dans parseE\n");
-    if(l!=NULL){
-        parseF(l,p);
-        if ((*l)->suivant != NULL){
-            if(strchr("+",(*l)->suivant->word[0])){
-                // printf("+");
-                parseF(&(*l)->suivant,p);
-                consommePlus(p);
-            }
-            if(strchr("-",(*l)->suivant->word[0])){
-                // printf("-");
-                parseF(&(*l)->suivant,p);
-                consommeMoins(p);
-            }
+    printf("Parse E\n");
+    parseF(l,p);
+    while(((*l)!= NULL) && (strchr("+",(*l)->word[0]) || strchr("-",(*l)->word[0]))){
+        
+        if(strchr("+",(*l)->word[0])){
+            printf("+\n");
+            parseF(&(*l)->suivant,p);
+            consommePlus(p);
+            supprimeTete(l);
+                
         }
+        else if(strchr("-",(*l)->word[0])){
+            printf("-\n");
+            parseF(&(*l)->suivant,p);
+            consommeMoins(p);
+            supprimeTete(l);
+        }
+        
     }
     return true;
 }
 
-// F := T( (*|/) T )?
+// F := T{*T}
 bool parseF(ListToken *l,Pile* p){
-    // printf("Dans parseF\n");
-    if(l!=NULL){
-        parseT(&(*l),p);
-        if ((*l)->suivant != NULL){
-            if(strchr("*",(*l)->suivant->word[0])){
-                // printf("*");
-                parseT(&(*l)->suivant,p);
-                consommeFois(p);
-            }
-            if(strchr("/",(*l)->suivant->word[0])){
-                // printf("/");
-                parseT(&(*l)->suivant,p);
-                consommeDivise(p);
-            }
+    printf("Parse F\n");
+    parseT(l,p);
+    while ((*l)!=NULL && (strchr("*",(*l)->word[0]) || strchr("/",(*l)->word[0]))){
+        // afficheToken((*l));
+        
+        if(strchr("*",(*l)->word[0])){
+            printf("*\n");
+            parseT(&(*l)->suivant,p);
+            consommeFois(p);
+            supprimeTete(l);
         }
-    }   
+        else if(strchr("/",(*l)->word[0])){
+            printf("/\n");
+            parseT(&(*l)->suivant,p);
+            consommeDivise(p);
+            supprimeTete(l);
+        }
+        
+        // printf("%c\n",(*l)->word[0]);
+    } ;
+  
     return true;
 }
 
 // T := Entier | ( E )
 bool parseT(ListToken *l, Pile *p){
     // printf("Dans parseT\n");
-    if(l!=NULL){
+    printf("Parse T\n");
+    if(*l!=NULL){
         if(strchr("0123456789",(*l)->word[0])){
-            consommeNombre(p,(*l)->word);
+            consommeNombre(p,l);
         }
-        else{
-            // printf("Parenthese");
+        else if(strchr("()",(*l)->word[0])){
             // Retire la premier parenthese
             supprimeTete(l);
             parseE(l,p);
             //retire la deuxieme parenthese
-            supprimeSuivant(l);
+            supprimeTete(l);
+            
         }
+
     }
     return true;
 }

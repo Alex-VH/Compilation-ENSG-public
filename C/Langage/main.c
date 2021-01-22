@@ -9,7 +9,7 @@
 
 int main(void){
 
-    char* expr = "(2*3)+7";
+    char* expr = "(1+2)*3";
 
     Source* source = initSource(expr);
     Lexer* lexer = initLexer();
